@@ -1,0 +1,43 @@
+@startuml 
+
+class PizzaOrderSystem {
+  - databaseManager: DataBaseManager
+  - authenticator: Authenticator
+  - paymentProcessor: PaymentProcessor
+  + PizzaOrderSystem(db_manager: DataBaseManager, auth: Authenticator, payment_proc: PaymentProcessor)
+  + placeOrder(order_details)
+  + updateOrder(order_id, new_details)
+  + cancelOrder(order_id)
+  + authenticateUser(username, password)
+  + processPayment(order_id)
+}
+
+class DataBaseManager {
+  - connection_string: str
+  + DataBaseManager(connection_string: str)
+  + connect()
+  + disconnect()
+  + executeQuery(query)
+  + fetchResults()
+}
+
+class Authenticator {
+  - user_database: DataBaseManager
+  + Authenticator(db_manager: DataBaseManager)
+  + authenticate(username, password)
+}
+
+class PaymentProcessor {
+  - api_key: str
+  + PaymentProcessor(api_key: str)
+  + processPayment(order_id, amount)
+}
+
+PizzaOrderSystem --> DataBaseManager
+PizzaOrderSystem --> Authenticator
+PizzaOrderSystem --> PaymentProcessor
+Authenticator --> DataBaseManager
+
+@enduml
+
+
