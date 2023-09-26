@@ -1,4 +1,4 @@
-@startuml 
+@startuml PizzaOrderSystem
 
 class PizzaOrderSystem {
   - databaseManager: DataBaseManager
@@ -39,5 +39,3 @@ PizzaOrderSystem --> PaymentProcessor
 Authenticator --> DataBaseManager
 
 @enduml
-
-
